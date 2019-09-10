@@ -1,0 +1,7 @@
+/* import here tailwind's base styles and configurations */
+
+@tailwind base;
+@tailwind components;
+/* Add here any custom component classes */
+@tailwind utilities;
+/* Add here any custom utilities you need */

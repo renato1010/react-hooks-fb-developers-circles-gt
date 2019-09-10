@@ -1,24 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
+import unlock from './imagenes/undraw_unlock_24mb.svg';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container flex flex-col mx-auto mt-10 App">
+      <img src={unlock} alt="lock" className="App_unlock_svg" />
     </div>
   );
 }
