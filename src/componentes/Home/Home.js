@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import unlock from '../imagenes/undraw_security_o890.svg';
-import './App.css';
+import unlock from '../../imagenes/undraw_security_o890.svg';
+import './Home.css';
 
 class Home extends Component {
 	render() {

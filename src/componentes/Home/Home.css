@@ -1,0 +1,16 @@
+.App {
+    background-color: #edf2f7;
+}
+/* .App img {
+} */
+
+/* .App .controls {
+  outline: 1px solid red;
+} */
+
+.App input[name='pin'] {
+    letter-spacing: 4ch;
+}
+/* .App .cancelar {
+  outline: 1px solid red;
+} */
