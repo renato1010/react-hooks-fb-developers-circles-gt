@@ -1,5 +1,9 @@
+.Page {
+  height: 100vh;
+}
 .MainDash {
   background: #ffffff;
+  height: 80%;
 }
 .controls-left {
   border-right: 1px solid #a0aec0;

@@ -9,10 +9,23 @@ class Home extends Component {
     this.state = {
       pin: "",
       pinError: false,
-      user: null
+      currentUser: null,
+      data: null
     };
     this.inputRef = React.createRef();
     this.handleChange = this.handleChange.bind(this);
+  }
+  componentDidMount() {
+    this.setState({ data: pinData });
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.isAValidPin(this.state.pin)) {
+      const user = this.getUserByPin(this.state.pin);
+      if (prevState.currentUser === null && !!user) {
+        this.setState({ currentUser: user });
+      }
+    }
   }
 
   handleChange(e) {
@@ -22,22 +35,14 @@ class Home extends Component {
     } else if (value === "") {
       this.setState({ pin: "", pinError: false });
     } else {
-      this.setState({ pinError: true, user: null });
-    }
-  }
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.isAValidPin(this.state.pin)) {
-      const user = this.getUserByPin(this.state.pin);
-      if (prevState.user === null && !!user) {
-        this.setState({ user });
-      }
+      this.setState({ pinError: true, currentUser: null });
     }
   }
 
   isAValidPin = pin => /\d{4}/.test(pin);
   getUserByPin = pin => {
     return (
-      pinData.find(val => {
+      this.state.data.find(val => {
         return val.pin === +pin;
       }) || null
     );
@@ -67,9 +72,9 @@ class Home extends Component {
             placeholder="****"
           />
         </div>
-        {!this.state.user && this.isAValidPin(this.state.pin) ? (
+        {!this.state.currentUser && this.isAValidPin(this.state.pin) ? (
           <small className="text-red-500 text-sm border border-red-400">
-            Usuario no encontrado
+            Pin erroneo
           </small>
         ) : (
           ""
@@ -81,7 +86,7 @@ class Home extends Component {
           </h3>
           <button
             onClick={() => {
-              this.setState({ pin: "", pinError: false });
+              this.setState({ pin: "", pinError: false, currentUser: null });
               this.inputRef.current.value = "";
             }}
             className="w-4/5 sm:w-2/5 h-10 my-4 bg-red-400 hover:bg-red-700 text-2xl
