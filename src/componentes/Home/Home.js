@@ -47,7 +47,7 @@ class Home extends Component {
     return (
       <div className="container flex flex-col items-center my-20 mx-auto sm:mt-10 App">
         <div
-          className="controls bg-gray-200 m-4 w-4/5 sm:w-3/4 md:w-3/6 mx-auto flex
+          className="controls-left bg-gray-200 m-4 w-4/5 sm:w-3/4 md:w-3/6 mx-auto flex
             flex-col md:flex-row md:items-center rounded"
         >
           <label

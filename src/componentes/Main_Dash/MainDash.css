@@ -1,0 +1,34 @@
+.MainDash {
+  background: #ffffff;
+}
+.controls-left {
+  border-right: 1px solid #a0aec0;
+}
+.flex33 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 33%;
+  flex: 1 1 33%;
+  cursor: pointer;
+}
+.flex33 h3 {
+  font-weight: bolder;
+  text-align: center;
+}
+.dash-center {
+  outline: 1px solid transparent;
+}
+.controls-right {
+  border-left: 1px solid #a0aec0;
+}
+.emoji-icon span {
+  font-size: 3rem;
+}
+
+@media all and (min-width: 768px) {
+  .emoji-icon span {
+    font-size: 5rem;
+  }
+}
