@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import "./MainDash.css";
 
 class MainDash extends Component {
+  constructor(props) {
+    super(props);
+    !this.props.user && this.props.history.push("./");
+  }
+
   render() {
     return (
       <div className="Page">

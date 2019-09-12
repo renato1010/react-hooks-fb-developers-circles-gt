@@ -9,7 +9,6 @@ class Home extends Component {
     this.state = {
       pin: "",
       pinError: false,
-      currentUser: null,
       data: null
     };
     this.inputRef = React.createRef();
@@ -20,22 +19,27 @@ class Home extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.isAValidPin(this.state.pin)) {
-      const user = this.getUserByPin(this.state.pin);
-      if (prevState.currentUser === null && !!user) {
-        this.setState({ currentUser: user });
-      }
+    if (this.props.user !== null) {
+      this.props.history.push("./main");
     }
   }
 
   handleChange(e) {
     const value = e.target.value;
     if (this.isAValidPin(value)) {
-      this.setState({ pin: value, pinError: false });
+      this.setState({ pin: value, pinError: false }, () => {
+        const user = this.getUserByPin(this.state.pin);
+        if (this.props.user === null && !!user) {
+          this.props.setUser(user);
+        }
+      });
     } else if (value === "") {
       this.setState({ pin: "", pinError: false });
     } else {
-      this.setState({ pinError: true, currentUser: null });
+      this.setState(
+        { pinError: true },
+        () => this.props.user && this.props.setUser(null)
+      );
     }
   }
 
@@ -72,7 +76,7 @@ class Home extends Component {
             placeholder="****"
           />
         </div>
-        {!this.state.currentUser && this.isAValidPin(this.state.pin) ? (
+        {!this.props.user && this.isAValidPin(this.state.pin) ? (
           <small className="text-red-500 text-sm border border-red-400">
             Pin erroneo
           </small>
@@ -86,7 +90,9 @@ class Home extends Component {
           </h3>
           <button
             onClick={() => {
-              this.setState({ pin: "", pinError: false, currentUser: null });
+              this.setState({ pin: "", pinError: false }, () =>
+                this.props.setUser(null)
+              );
               this.inputRef.current.value = "";
             }}
             className="w-4/5 sm:w-2/5 h-10 my-4 bg-red-400 hover:bg-red-700 text-2xl

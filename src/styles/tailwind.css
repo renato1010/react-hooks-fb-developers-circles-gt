@@ -427,7 +427,7 @@ ul {
 
 /**
  * 1. Use the system font stack as a sane default.
- * 2. Use Tailwind's default "normal" line-height so the currentUser isn't forced
+ * 2. Use Tailwind's default "normal" line-height so the user isn't forced
  * to override it to ensure consistency even when using the default theme.
  */
 
@@ -440,7 +440,7 @@ html {
  * Allow adding a border to an element by just adding a border-width.
  *
  * By default, the way the browser specifies that an element should have no
- * border is by setting it's border-style to `none` in the currentUser-agent
+ * border is by setting it's border-style to `none` in the user-agent
  * stylesheet.
  *
  * In order to easily add borders to elements by just setting the `border-width`
