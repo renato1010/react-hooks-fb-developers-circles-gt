@@ -8,10 +8,13 @@ class App extends Component {
     super(props);
     this.state = {
       user: null,
-      setUser: this.setCurrentUser
+      setUser: this.setCurrentUser,
+      isAValidPin: this.isAValidPin
     };
     this.setCurrentUser = this.setCurrentUser.bind(this);
   }
+
+  isAValidPin = pin => /\d{4}/.test(pin);
   setCurrentUser = user => this.setState({ user });
 
   render() {
@@ -25,9 +28,7 @@ class App extends Component {
         <Route
           exact
           path="/main"
-          render={routerProps => (
-            <MainDash user={this.state.user} {...routerProps} />
-          )}
+          render={routerProps => <MainDash {...this.state} {...routerProps} />}
         />
       </Switch>
     );

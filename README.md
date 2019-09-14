@@ -1,3 +1,26 @@
+# React con Hooks; Facebook developer circles Guatemala
+
+
+Evento: Guatemala 26 de Septiembre de 2019
+Campus Tec Torre II 1-30 via 4
+Salon Auditorio, Nivel 2
+
+
+## Creditos:
+
+[Aplicacion de React creada con CRA create-react-app](https://create-react-app.dev/ "Create React App")
+
+[CSS framework utilizada: TailwindCSS; utility-first](https://tailwindcss.com/ "TailwindCSS utility-first CSS framework")
+
+[Guia para implementar TailwindCSS en React sin eyectar Webpack](https://blog.logrocket.com/create-react-app-and-tailwindcss/)
+
+
+## Recursos:
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -26,4 +49,3 @@ The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-

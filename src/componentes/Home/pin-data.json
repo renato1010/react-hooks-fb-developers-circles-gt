@@ -4,25 +4,25 @@
       "nombre": "Renato",
       "Apellido": "Perez",
       "pin": 1234,
-      "saldo": 210.0
+      "saldo": 1210.0
     },
     {
       "nombre": "Juan",
       "Apellido": "Lopez",
       "pin": 9999,
-      "saldo": 300.05
+      "saldo": 1300.05
     },
     {
       "nombre": "Roberto",
       "Apellido": "Morales",
       "pin": 7777,
-      "saldo": 2750.0
+      "saldo": 12750.0
     },
     {
       "nombre": "Regina",
       "Apellido": "Castillo",
       "pin": 1020,
-      "saldo": 4150.0
+      "saldo": 24150.0
     }
   ]
 }

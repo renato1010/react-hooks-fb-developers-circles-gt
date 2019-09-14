@@ -18,7 +18,7 @@ class Home extends Component {
     this.setState({ data: pinData });
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate() {
     if (this.props.user !== null) {
       this.props.history.push("./main");
     }
@@ -26,7 +26,7 @@ class Home extends Component {
 
   handleChange(e) {
     const value = e.target.value;
-    if (this.isAValidPin(value)) {
+    if (this.props.isAValidPin(value)) {
       this.setState({ pin: value, pinError: false }, () => {
         const user = this.getUserByPin(this.state.pin);
         if (this.props.user === null && !!user) {
@@ -43,7 +43,6 @@ class Home extends Component {
     }
   }
 
-  isAValidPin = pin => /\d{4}/.test(pin);
   getUserByPin = pin => {
     return (
       this.state.data.find(val => {
@@ -76,7 +75,7 @@ class Home extends Component {
             placeholder="****"
           />
         </div>
-        {!this.props.user && this.isAValidPin(this.state.pin) ? (
+        {!this.props.user && this.props.isAValidPin(this.state.pin) ? (
           <small className="text-red-500 text-sm border border-red-400">
             Pin erroneo
           </small>
