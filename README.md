@@ -1,10 +1,8 @@
 # React con Hooks; Facebook developer circles Guatemala
 
-
 Evento: Guatemala 26 de Septiembre de 2019
 Campus Tec Torre II 1-30 via 4
 Salon Auditorio, Nivel 2
-
 
 ## Creditos:
 
@@ -14,12 +12,9 @@ Salon Auditorio, Nivel 2
 
 [Guia para implementar TailwindCSS en React sin eyectar Webpack](https://blog.logrocket.com/create-react-app-and-tailwindcss/)
 
+[Los Componentes de Checkmark(ok) y Mark Cross(error) fueron obtenidos de este codepen:](https://codepen.io/sat-ui/pen/BeWbeo)
 
 ## Recursos:
-
-
-
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
