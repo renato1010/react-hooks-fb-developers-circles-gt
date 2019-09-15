@@ -21,7 +21,7 @@ export default class Saldo extends Component {
       timeZone: "America/Guatemala"
     });
     const {
-      user: { saldo }
+      user: { saldo = 1000 }
     } = this.props;
     return (
       <div className="w-4/5 lg:max-w-md bg-white shadow-lg border rounded overflow-hidden">

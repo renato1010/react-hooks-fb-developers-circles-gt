@@ -11,25 +11,19 @@ class App extends Component {
       setUser: this.setCurrentUser,
       isAValidPin: this.isAValidPin
     };
-    this.setCurrentUser = this.setCurrentUser.bind(this);
   }
 
-  isAValidPin = pin => /\d{4}/.test(pin);
   setCurrentUser = user => this.setState({ user });
+  isAValidPin = pin => /\d{4}/.test(pin);
 
   render() {
     return (
       <Switch>
         <Route
-          exact
-          path="/"
-          render={routerProps => <Home {...routerProps} {...this.state} />}
-        />
-        <Route
-          exact
           path="/main"
-          render={routerProps => <MainDash {...this.state} {...routerProps} />}
+          render={rp => <MainDash {...rp} {...this.state} />}
         />
+        <Route exact path="/" render={rp => <Home {...this.state} {...rp} />} />
       </Switch>
     );
   }

@@ -15,12 +15,14 @@ class Home extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount() {
-    this.setState({ data: pinData });
+    if (!this.state.data) {
+      this.setState({ data: pinData });
+    }
   }
 
   componentDidUpdate() {
     if (this.props.user !== null) {
-      this.props.history.push("./main");
+      this.props.history.push("/main");
     }
   }
 

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Route, Link } from "react-router-dom";
 import Saldo from "../Saldo";
 import "./MainDash.css";
 import CambioPin from "../cambio-pin/CambioPin";
@@ -7,40 +8,38 @@ class MainDash extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      componentToShow: null
+      componentToShow: null,
+      renderSubCmp: false
     };
-    !this.props.user && this.props.history.push("./");
-    this.handleClick = this.handleClick.bind(this);
+    this.props.user === null && this.redirectToHome();
   }
 
-  handleClick(cmp) {
-    this.setState({ componentToShow: cmp });
-  }
+  redirectToHome = () => {
+    console.log("redirecting to home");
+    this.props.history.push("/");
+  };
 
-  componentSwitcher() {
-    switch (this.state.componentToShow) {
+  operacionesSwitcher() {
+    switch (this.props.match.params.operacion) {
       case "saldo":
+        this.setState({ renderSubCmp: true });
         return <Saldo {...this.props} />;
       case "cambio-pin":
-        return (
-          <CambioPin
-            setUser={this.props.setUser}
-            user={this.props.user}
-            isAValidPin={this.props.isAValidPin}
-          />
-        );
+        this.setState({ renderSubCmp: true });
+        return <CambioPin {...this.props} />;
       default:
-        return null;
+        return <h3>Seleccione una Opcion</h3>;
     }
   }
 
   render() {
+    const { match } = this.props;
     return (
       <div className="Page">
         <div className="container flex items-center my-auto mx-auto sm:mt-10 border border-gray-500 MainDash">
           <div className="h-full bg-gray-200 w-1/4 md:w-1/6 flex flex-col controls-left">
-            <div
-              onClick={() => this.handleClick("saldo")}
+            <Link
+              to={`${match.url}/saldo`}
               className="flex33 bg-indigo-300 hover:bg-indigo-500 text-white font-bold py-2
 	            px-4 border-b-4 border-indigo-700 hover:border-indigo-500 rounded"
             >
@@ -50,8 +49,9 @@ class MainDash extends Component {
                   🏧
                 </span>
               </div>
-            </div>
+            </Link>
             <div
+              onClick={() => this.props.history.push("/")}
               className="flex33 bg-indigo-300 hover:bg-indigo-500 text-white font-bold py-2
 	            px-4 border-b-4 border-indigo-700 hover:border-indigo-500 rounded"
             >
@@ -75,12 +75,31 @@ class MainDash extends Component {
             </div>
           </div>
           <div className="h-full w-1/2 md:w-2/3 bg-gray-300 dash-center flex items-center justify-center">
-            {this.componentSwitcher()}
+            <Route
+              path={`${match.url}/saldo`}
+              render={rp => {
+                return <Saldo {...this.state} {...this.props} {...rp} />;
+              }}
+            />
+            <Route
+              path={`${match.url}/cambio-pin`}
+              render={rp => (
+                <CambioPin {...this.state} {...this.props} {...rp} />
+              )}
+            />
+            <Route
+              exact
+              path="/main/"
+              render={rp => {
+                return <h3>Seleccione una Opcion</h3>;
+              }}
+            />
           </div>
           <div className="h-full bg-gray-200 w-1/4 md:w-1/6 flex flex-col controls-right">
             <div
-              className="flex33 bg-indigo-300 hover:bg-indigo-500 text-white py-2
-	            px-4 border-b-4 border-indigo-700 hover:border-indigo-500 rounded"
+              className="flex33 bg-indigo-300 hover:bg-indigo-500 text-white
+              py-2 px-4 border-b-4 border-indigo-700 hover:border-indigo-500
+              rounded"
             >
               <h3 className="text-sm md:text-lg">Retiro de Efectivo</h3>
               <div className="emoji-icon">
@@ -89,8 +108,8 @@ class MainDash extends Component {
                 </span>
               </div>
             </div>
-            <div
-              onClick={() => this.handleClick("cambio-pin")}
+            <Link
+              to={`${match.path}/cambio-pin`}
               className="flex33 bg-indigo-300 hover:bg-indigo-500 text-white py-2
 	            px-4 border-b-4 border-indigo-700 hover:border-indigo-500 rounded"
             >
@@ -100,7 +119,7 @@ class MainDash extends Component {
                   🔢
                 </span>
               </div>
-            </div>
+            </Link>
             <div
               className="flex33 bg-indigo-300 hover:bg-indigo-500 text-white py-2
 	            px-4 border-b-4 border-indigo-700 hover:border-indigo-500 rounded"

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import Success from "../success/Success";
 import Failure from "../failure/Failure";
 
-export default class CambioPin extends Component {
+class CambioPin extends Component {
   constructor(props) {
     super(props);
 
@@ -12,23 +13,25 @@ export default class CambioPin extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log(this.pinNuevoRef.current.value);
-    console.log(prevProps.user);
-    console.log(
-      this.state.form.isSubmitted,
-      !this.state.form.hasError,
-      prevProps.user.pin
-    );
-
+  componentDidUpdate(prevProps) {
     if (
       this.state.form.isSubmitted &&
       !this.state.form.hasError &&
       prevProps.user.pin !== +this.pinNuevoRef.current.value
     ) {
-      console.log("ready to update user");
       const user = { ...prevProps.user, pin: +this.pinNuevoRef.current.value };
       prevProps.setUser(user);
+    }
+    if (this.props.user.pin === +this.pinNuevoRef.current.value) {
+      console.log("changing location");
+      setTimeout(
+        () =>
+          this.props.history.push({
+            pathname: "/",
+            state: { user: this.props.user }
+          }),
+        1000
+      );
     }
   }
 
@@ -37,13 +40,15 @@ export default class CambioPin extends Component {
     const pinNuevo = { val: "", hasError: false };
     const hasError = false;
     const isSubmitted = false;
+    const pinError = { status: false, messages: [] };
 
     return {
       form: {
         pinAnterior,
         pinNuevo,
         hasError,
-        isSubmitted
+        isSubmitted,
+        pinError
       }
     };
   }
@@ -65,7 +70,14 @@ export default class CambioPin extends Component {
   }
 
   checkSubmission() {
-    const form = { ...this.state.form };
+    let form = { ...this.state.form };
+    form = this.validatePinValues(form);
+    form = this.validatePinReferences(form);
+    form.isSubmitted = true;
+    this.setState({ form });
+  }
+
+  validatePinValues(form) {
     [this.pinAnteriorRef, this.pinNuevoRef].forEach((ref, i) => {
       if (!this.props.isAValidPin(ref.current.value)) {
         if (i === 0) {
@@ -77,27 +89,58 @@ export default class CambioPin extends Component {
         }
       }
     });
+    return form;
+  }
+
+  validatePinReferences(form) {
     const isSamePin =
       this.pinAnteriorRef.current.value === this.pinNuevoRef.current.value;
-    if (!form.hasError && isSamePin) {
+    const pinAnteriorIsOk =
+      this.props.user.pin === +this.pinAnteriorRef.current.value;
+    if (isSamePin) {
       form.hasError = true;
+      form.pinError.status = true;
+      form.pinError.messages.push(
+        "Pin anterior y Pin nuevo no pueden ser iguales"
+      );
     }
-    form.isSubmitted = true;
-    this.setState({ form });
+    if (!pinAnteriorIsOk) {
+      form.hasError = true;
+      form.pinError.status = true;
+      form.pinError.messages.push("Pin anterior incorrecto");
+    }
+    return form;
   }
+  // redirectToHome = () => {
+  //   if (!this.state.form.isSubmitted || !this.pinNuevoRef.current) return;
+  //   if (this.props.user.pin === +this.pinNuevoRef.current.value) {
+  //     console.log("ready to redirect");
+  //     return <Redirect to="/" />;
+  //   }
+  // };
 
   render() {
     const {
       form: { hasError: formError, pinAnterior, pinNuevo, isSubmitted }
     } = this.state;
+    const pinErrorMsgs = (
+      <ul>
+        {this.state.form.pinError.messages.map((error, i) => (
+          <li className="text-xs text-red-500" key={i}>
+            {error}
+          </li>
+        ))}
+      </ul>
+    );
 
     return (
       <div className="w-5/6 md:w-2/3 lg:w-1/2 mx-auto bg-white shadow-lg border rounded overflow-hidden">
         <div className="h-full content">
           <div
             className="flex px-3 flex-col justify-center items-center"
-            style={{ height: "20rem" }}
+            style={{ height: "22rem" }}
           >
+            {this.state.form.pinError.status ? pinErrorMsgs : null}
             <form className="w-full p-2 flex flex-col justify-between items-start">
               <label
                 className="w-full h-6 text-gray-700 font-bold mb-4"
@@ -152,3 +195,5 @@ export default class CambioPin extends Component {
     );
   }
 }
+
+export default withRouter(CambioPin);
