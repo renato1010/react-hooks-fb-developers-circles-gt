@@ -81,9 +81,7 @@ class Home extends Component {
           <small className="text-red-500 text-sm border border-red-400">
             Pin erroneo
           </small>
-        ) : (
-          ""
-        )}
+        ) : null}
         <div className="cancelar w-4/5 sm:w-3/4 md:w-3/6 mx-auto flex flex-col items-center  mx-auto mt-10">
           <h3 className="text-gray-800 font-sans text-center text-md sm:text-lg md:text-2xl">
             Si hay algun error oprima&nbsp;

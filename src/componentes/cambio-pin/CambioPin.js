@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
 import Success from "../success/Success";
 import Failure from "../failure/Failure";
 
@@ -111,13 +110,6 @@ class CambioPin extends Component {
     }
     return form;
   }
-  // redirectToHome = () => {
-  //   if (!this.state.form.isSubmitted || !this.pinNuevoRef.current) return;
-  //   if (this.props.user.pin === +this.pinNuevoRef.current.value) {
-  //     console.log("ready to redirect");
-  //     return <Redirect to="/" />;
-  //   }
-  // };
 
   render() {
     const {
@@ -196,4 +188,4 @@ class CambioPin extends Component {
   }
 }
 
-export default withRouter(CambioPin);
+export default CambioPin;

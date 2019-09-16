@@ -19,19 +19,6 @@ class MainDash extends Component {
     this.props.history.push("/");
   };
 
-  operacionesSwitcher() {
-    switch (this.props.match.params.operacion) {
-      case "saldo":
-        this.setState({ renderSubCmp: true });
-        return <Saldo {...this.props} />;
-      case "cambio-pin":
-        this.setState({ renderSubCmp: true });
-        return <CambioPin {...this.props} />;
-      default:
-        return <h3>Seleccione una Opcion</h3>;
-    }
-  }
-
   render() {
     const { match } = this.props;
     return (
@@ -51,7 +38,6 @@ class MainDash extends Component {
               </div>
             </Link>
             <div
-              onClick={() => this.props.history.push("/")}
               className="flex33 bg-indigo-300 hover:bg-indigo-500 text-white font-bold py-2
 	            px-4 border-b-4 border-indigo-700 hover:border-indigo-500 rounded"
             >

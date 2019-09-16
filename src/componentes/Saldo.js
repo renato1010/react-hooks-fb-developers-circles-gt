@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class Saldo extends Component {
+class Saldo extends Component {
   render() {
     const formatter = new Intl.NumberFormat("es-GT", {
       style: "currency",
@@ -44,3 +44,4 @@ export default class Saldo extends Component {
     );
   }
 }
+export default Saldo;
