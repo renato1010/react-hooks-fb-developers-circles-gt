@@ -7,10 +7,6 @@ import CambioPin from "../cambio-pin/CambioPin";
 class MainDash extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      componentToShow: null,
-      renderSubCmp: false
-    };
     this.props.user === null && this.redirectToHome();
   }
 
@@ -64,14 +60,12 @@ class MainDash extends Component {
             <Route
               path={`${match.url}/saldo`}
               render={rp => {
-                return <Saldo {...this.state} {...this.props} {...rp} />;
+                return <Saldo {...this.props} {...rp} />;
               }}
             />
             <Route
               path={`${match.url}/cambio-pin`}
-              render={rp => (
-                <CambioPin {...this.state} {...this.props} {...rp} />
-              )}
+              render={rp => <CambioPin {...this.props} {...rp} />}
             />
             <Route
               exact
