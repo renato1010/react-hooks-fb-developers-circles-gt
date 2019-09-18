@@ -4,7 +4,6 @@ import Home from "./componentes/Home/Home";
 import MainDash from "./componentes/Main_Dash/MainDash";
 
 function App() {
-
   const [user, setUser] = useState(null);
   const isAValidPin = pin => /\d{4}/.test(pin);
 
