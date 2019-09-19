@@ -18,7 +18,7 @@ Salon Auditorio, Nivel 2
 
 [Link para codesandbox (master):](https://codesandbox.io/s/github/renato1010/react-hooks-fb-developers-circles-gt/tree/master/?fontsize=14 "Codesandbox.io")
 
-[Link para Stackblitz (master):](https://stackblitz.com/github/yqnimokmn "Stackblitz")
+[Link para Stackblitz (master):](https://github.com/renato1010/react-hooks-fb-developers-circles-gt "Stackblitz")
 
 
 ## Recursos:
