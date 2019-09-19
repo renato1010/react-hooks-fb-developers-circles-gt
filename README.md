@@ -12,7 +12,14 @@ Salon Auditorio, Nivel 2
 
 [Guia para implementar TailwindCSS en React sin eyectar Webpack](https://blog.logrocket.com/create-react-app-and-tailwindcss/)
 
+[Fotos/ilustraciones son de unDraw](https://undraw.co)
+
 [Los Componentes de Checkmark(ok) y Mark Cross(error) fueron obtenidos de este codepen:](https://codepen.io/sat-ui/pen/BeWbeo)
+
+[Link para codesandbox (master):](https://codesandbox.io/s/github/renato1010/react-hooks-fb-developers-circles-gt/tree/master/?fontsize=14 "Codesandbox.io")
+
+[Link para Stackblitz (master):](https://stackblitz.com/github/yqnimokmn "Stackblitz")
+
 
 ## Recursos:
 
