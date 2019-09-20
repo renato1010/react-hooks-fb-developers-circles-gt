@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Home from "./componentes/Home/Home";
 import MainDash from "./componentes/Main_Dash/MainDash";
 
@@ -18,13 +18,19 @@ class App extends Component {
 
   render() {
     return (
-      <Switch>
-        <Route
-          path="/main"
-          render={rp => <MainDash {...rp} {...this.state} />}
-        />
-        <Route exact path="/" render={rp => <Home {...this.state} {...rp} />} />
-      </Switch>
+      <Router>
+        <Switch>
+          <Route
+            path="/main"
+            render={rp => <MainDash {...rp} {...this.state} />}
+          />
+          <Route
+            exact
+            path="/"
+            render={rp => <Home {...this.state} {...rp} />}
+          />
+        </Switch>
+      </Router>
     );
   }
 }
