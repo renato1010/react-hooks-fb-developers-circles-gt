@@ -14,59 +14,17 @@ function Home(props) {
   //   this.inputRef = React.createRef();
   //   this.handleChange = this.handleChange.bind(this);
   // }
+  const inputRef = React.createRef();
+
+  const [data] = useState(pinData);
+  const [pin, setPin] = useState("");
+  const [pinError, setPinError] = useState(false);
+
   // componentDidMount() {
   //   if (!this.state.data) {
   //     this.setState({ data: pinData });
   //   }
   // }
-
-  const inputRef = React.createRef();
-  const [data, setData] = useState(null);
-  const [pin, setPin] = useState("");
-  const [pinError, setPinError] = useState(false);
-
-  function getUserByPin(pin) {
-    return (
-      data.find(val => {
-        return val.pin === +pin;
-      }) || null
-    );
-  }
-
-  useEffect(() => {
-    setData(pinData);
-  }, []);
-
-  useEffect(() => {
-    if (props.user !== null) {
-      props.history.push("/main");
-    }
-  });
-
-  // efecto para setear usuario si hay usuario con ese pin
-  useEffect(() => {
-    if (data) {
-      const userFromPin = getUserByPin(pin);
-      if (props.user === null && !!userFromPin && !pinError) {
-        props.setUser(userFromPin);
-      }
-    }
-  });
-
-  // efecto para re-setear usuario si hay error
-  useEffect(() => {
-    if (!!props.user && pinError) {
-      props.setUser(null);
-    }
-  });
-
-  // efecto para re-setear valor de input field
-  useEffect(() => {
-    if (!pin && !pinError && !!props.user) {
-      props.setUser(null);
-      inputRef.current.value = "";
-    }
-  });
 
   // componentDidUpdate() {
   //   if (this.props.user !== null) {
@@ -74,17 +32,30 @@ function Home(props) {
   //   }
   // }
 
-  const handleChange = e => {
+  // efecto para setear setear usuario
+
+  useEffect(() => {
+    if (!!props.user) {
+      props.history.push("/main");
+    }
+    if (pin && !pinError && !props.user) {
+      const user = getUserByPin(pin);
+      props.setUser(user);
+    }
+  });
+
+  function handleChange(e) {
     const value = e.target.value;
     if (props.isAValidPin(value)) {
-      setPin(value);
-      setPinError(false);
       // this.setState({ pin: value, pinError: false }, () => {
       //   const user = this.getUserByPin(this.state.pin);
       //   if (this.props.user === null && !!user) {
       //     this.props.setUser(user);
       //   }
-      // });
+      // }
+      // );
+      setPin(value);
+      setPinError(false);
     } else if (value === "") {
       // this.setState({ pin: "", pinError: false });
       setPin("");
@@ -96,7 +67,15 @@ function Home(props) {
       // );
       setPinError(true);
     }
-  };
+  }
+
+  function getUserByPin(pin) {
+    return (
+      data.find(val => {
+        return val.pin === +pin;
+      }) || null
+    );
+  }
 
   return (
     <div className="container flex flex-col items-center my-20 mx-auto sm:mt-10 App">
@@ -133,12 +112,13 @@ function Home(props) {
         </h3>
         <button
           onClick={() => {
-            setPin("");
-            inputRef.current.value = "";
-            setPinError(false);
             // this.setState({ pin: "", pinError: false }, () =>
             //   this.props.setUser(null)
             // );
+            setPin("");
+            setPinError(false);
+            props.setUser(null);
+            inputRef.current.value = "";
           }}
           className="w-4/5 sm:w-2/5 h-10 my-4 bg-red-400 hover:bg-red-700 text-2xl
               font-bold px-6 rounded align-middle"
