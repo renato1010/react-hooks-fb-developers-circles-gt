@@ -81,8 +81,9 @@ function CambioPin(props) {
       };
       checkSubmission(resetForm);
       // this.setState({ form: resetForm }, () => this.checkSubmission());
-    } else {
-      checkSubmission();
+    }
+    if (!form.hasError) {
+      checkSubmission(form);
     }
   }
 
@@ -111,7 +112,7 @@ function CambioPin(props) {
 
   function validatePinReferences(form) {
     const isSamePin =
-      pinAnteriorRef.current.value === +pinNuevoRef.current.value;
+      +pinAnteriorRef.current.value === +pinNuevoRef.current.value;
     const pinAnteriorIsOk = props.user.pin === +pinAnteriorRef.current.value;
     if (isSamePin) {
       form.hasError = true;
