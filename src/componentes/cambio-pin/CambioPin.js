@@ -21,7 +21,10 @@ class CambioPin extends Component {
       const user = { ...prevProps.user, pin: +this.pinNuevoRef.current.value };
       prevProps.setUser(user);
     }
-    if (this.props.user.pin === +this.pinNuevoRef.current.value) {
+    if (
+      this.props.user.pin === +this.pinNuevoRef.current.value &&
+      !this.state.form.hasError
+    ) {
       console.log("changing location");
       setTimeout(
         () =>
