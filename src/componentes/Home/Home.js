@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import unlock from "../../imagenes/undraw_security_o890.svg";
 import { data as pinData } from "./pin-data";
 import "./Home.css";
+import { UserContext } from "../../contexts/user.context";
 
 function Home(props) {
   // constructor(props) {
@@ -17,6 +18,7 @@ function Home(props) {
   const inputRef = React.createRef();
 
   const [data] = useState(pinData);
+  const { user, changeUser } = useContext(UserContext);
   const [pin, setPin] = useState("");
   const [pinError, setPinError] = useState(false);
 
@@ -35,12 +37,12 @@ function Home(props) {
   // efecto para setear setear usuario
 
   useEffect(() => {
-    if (!!props.user) {
+    if (!!user) {
       props.history.push("/main");
     }
     if (pin && !pinError && !props.user) {
-      const user = getUserByPin(pin);
-      props.setUser(user);
+      const userByPin = getUserByPin(pin);
+      changeUser(userByPin);
     }
   });
 
